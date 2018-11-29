@@ -1,0 +1,267 @@
+/*hacer unn programa utilizando funciones que permita resolver los siguientes ejercicios.
+1. fibonacci  
+2. serie de taylor
+3. ver resultados
+4. salir*/
+
+/*
+-este programa fue echo por:
+Elmer Gustavo Gonzalez Gonzalez
+
+-carnet:  GG18040
+*/
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>  
+#include <math.h>
+#include <windows.h> 
+#include <cstdio> 
+#include <fstream>
+#include <stdlib.h>
+
+using namespace std;
+
+void cargar ();//declaracion de la funcion que permite un tiempo de carga.
+double factorial (int n);
+double tailor (int n, int x);
+//como primer paso se hacen las declaraciones de los prototipos de las funciones.
+void menu_principal ();
+void menu_fibonacci ();
+void menu_serieDeTaylor ();
+void menu_verResultados ();
+
+
+int main(int argc, char** argv) {
+	
+	
+
+	cout<<"---------------------------------------------------------------------------------"<<endl;
+	cout<<"  "<<endl;
+	cout<<"  "<<endl;
+	cout<< "\n\n\t\tVIENVENIDOS AL PROGRAMA\n";
+	cout<<"  "<<endl;
+	cout<<"  "<<endl;
+	cout<<"---------------------------------------------------------------------------------"<<endl;
+    
+	
+	cargar();
+	system("cls");
+
+	
+	//como tercer  paso se manda a llamar la funcion.
+	menu_principal();
+	
+	return 0;
+}
+
+
+//funcion que permite dar un tiempo de carga
+void cargar(){
+
+	//Variable cargar servira como contador
+	int carga = 1;
+
+	cout << "\nEl programa esta cargando" << endl;
+
+
+	//ciclo while para generar un tiempo de carga
+	do {
+
+		//Funcion Sleep para permite generar un tiempo de carga
+		Sleep(800);
+
+		cout << "....";  
+		
+		//Variable carga se utiliza como contador
+		carga++;
+
+	} while (carga < 4);
+}
+
+//como segundo paso se declara el cuerpo de la funcion
+void menu_principal() {
+	//permite controlar el ciclo, bucle
+	bool repite = true;
+	//declarar variables
+	int opcion;
+	
+	do {
+		
+		//el tipo del menu
+		cout << "\n\t\t\t..::MENU PRINCIPAL::..\n";
+		
+		//las opciones del menu
+		cout << "\n\t1. Fibonacci\n";
+		cout << "\t2. Serie de Tailor\n";
+		cout << "\t3. Ver Resultado\n";
+		cout << "\t0. Salir\n";
+		
+		//leer las opcion elegida por el usuario
+		cout << "\n\tOpcion: ";
+		cin >> opcion;
+		
+		//alternativas
+		switch (opcion) {
+		
+			case 1:
+				menu_fibonacci ();
+				break;
+				
+			case 2:
+				menu_serieDeTaylor ();
+				break;
+				
+			case 3:
+				menu_verResultados ();
+				break;
+				
+			case 0:
+				repite = false;
+				break;
+		}
+   }while(repite);
+	system("cls");//esta funcion limpia la pantalla
+} 
+
+
+//como segundo paso se declara el cuerpo de la funcion
+void menu_fibonacci () {
+	//permite controlar el ciclo, bucle
+	bool repite = true;
+	//declarar variables
+	int opcion;
+	int n;
+	int num=1;
+	int anterior=0;
+	int aux;
+	
+     cout<<"digite el numero de elementos: ";
+     cin>>n;
+	
+	for(int i=0 ; i<n ; i++){
+    	printf("%d, ",num);
+		aux = num;
+		num = num + anterior;
+		anterior = aux;
+	}printf("\n\n\n");
+		
+				
+	do {
+		
+		//el tipo del menu
+		cout << "\n\t\t\t..::FIBONACCI::..\n";
+		
+		//las opciones del menu
+		cout << "\t0. Salir\n";
+		
+		//leer las opcion elegida por el usuario
+		cout << "\n\tOpcion: ";
+		cin >> opcion;
+		
+		//alternativas
+		switch (opcion) {
+				
+			case 0:
+				repite = false;
+				break;
+		}
+   }while(repite);
+	system("cls");//esta funcion limpia la pantalla
+} 
+
+//como segundo paso se declara el cuerpo de la funcion
+void menu_serieDeTaylor () {
+	//permite controlar el ciclo, bucle
+	bool repite = true;
+	//declarar  variables
+	int opcion;
+	int n;
+	int x;
+	
+	system("cls");//esta funcion limpia la pantalla
+	do {
+		
+		//el tipo del menu
+		cout << "\n\t\t\t..::SERIE DE TAILOR::..\n";
+		
+		
+		cout<< "cuantos terminos desea n? ";
+     	cin>>n;
+    	cout<< "digita el valor de x? ";
+    	cin>>x;
+    	printf("El valor de taylor par n=%d, x=%d es f(x)=%f\n", n, x, tailor(n, x));
+    	system("pause");
+		//las opciones del menu
+		cout << "\t0. Salir\n";
+		
+		//leer las opcion elegida por el usuario
+		cout << "\n\tOpcion: ";
+		cin >> opcion;
+		
+		//alternativas
+		switch (opcion) {
+		
+			case 0:
+				repite = false;
+				break;
+		}
+   }while(repite);
+	system("cls");//esta funcion limpia la pantalla
+} 
+
+//este ciclo calcula la serie de taylor y lo divide por el factorail
+	double tailor(int n, int x){
+		double t , s = 0;
+		for (int i = 0 ; i < n ; i++){
+			t = pow(x,i) / factorial(i);
+			s += t;
+		}
+		return s;
+	}
+	
+//este siclo hace el factorial de un numero
+	double factorial( int n){
+		double fac = 1;
+		for (int i = 2 ; i <= n ; i++){
+			fac *= i;
+		}
+		return fac;
+	}
+
+//como segundo paso se declara el cuerpo de la funcion
+void menu_verResultados() {
+	//permite controlar el ciclo, bucle
+	bool repite = true;
+	//declarar variables
+	int opcion;
+	
+	 	ofstream archivo;
+ archivo.open("Examen.txt");
+ archivo << opcion ;
+ cout << "El nombre se ha guardado satisfactoriamente, debe abrir el archivo Examen.txt en la carpeta del programa para ver los resultados" << endl;
+ system("pause>>null");
+	
+	do {
+		
+		//el tipo del menu
+		cout << "\n\t\t\t..::VER RESULTADOS::..\n";
+		
+		//las opciones del menu
+		
+		cout << "\t0. Salir\n";
+		
+		//leer las opcion elegida por el usuario
+		cout << "\n\tOpcion: ";
+		cin >> opcion;
+		
+		//alternativas
+		switch (opcion) {
+		
+				
+			case 0:
+				repite = false;
+				break;
+		}
+   }while(repite);
+	system("cls");//esta funcion limpia la pantalla
+} 
